@@ -6,7 +6,7 @@ import {useForm} from 'react-hook-form'
 const RegisterPage = () => {
 
     const {register, watch, handleSubmit, reset, formState: {errors}} = useForm()
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const [serverRespoonse, setServerResponse] = useState('')
 
     const submitForm = (data) => {

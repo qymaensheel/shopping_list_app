@@ -10,3 +10,20 @@
     margin:auto;
     width:40%;
 }
+
+.shopping_list{
+    padding:20px;
+    border: 2px solid grey;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    width:60%;
+    margin: 20px auto;
+}
+
+.shopping_list h3 {
+    text-align: center;
+}
+
+.shopping_list .date {
+    text-align: right
+}
