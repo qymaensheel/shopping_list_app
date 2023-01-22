@@ -1,27 +1,38 @@
-import React, {useEffect, useState} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import NavBar from "./components/Navbar"
+import './styles/main.css'
+
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from 'react-router-dom'
+import HomePage from "./components/home";
+import LoginPage from "./components/Login";
+import RegisterPage from "./components/Register";
+import CreateList from "./components/CreateList";
+import Login from "./components/Login";
 
 const App=()=>{
-
-    useEffect(
-        ()=>{
-            fetch('/shopping_list/hello')
-                .then(response=>response.json())
-                .then(data=>{console.log(data)
-                setMessage(data.message)
-                })
-                .catch(err=>console.log(err))
-
-
-        }, []
-    )
-    const [message, setMessage] = useState('')
-
     return (
-        <div className="barton's app">
-            {message}
-        </div>
+        <Router>
+            <NavBar/>
+            <div className="containerCls container">
+                <Routes>
+                    <Route path="/createList" element={ <CreateList/>}>
+                    </Route>
+                    <Route path="/login" element={<LoginPage/>}>
+                    </Route>
+                    <Route path="/register" element={<RegisterPage/>}>
+                    </Route>
+                    <Route path="/" element={<HomePage/>}>
+                    </Route>
+                </Routes>
+            </div>
+        </Router>
     )
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'))
