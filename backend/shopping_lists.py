@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify, make_response
 from flask_jwt_extended import jwt_required
 from flask_restx import Namespace, Resource, fields
 
@@ -30,7 +30,7 @@ class ShoppingListsResource(Resource):
 
         return lists
 
-    @lists_ns.marshal_with(shopping_list_model)
+    # @lists_ns.marshal_with(shopping_list_model)
     @lists_ns.expect(shopping_list_model)
     @jwt_required()
     def post(self):  # Create a new shopping list
@@ -40,7 +40,7 @@ class ShoppingListsResource(Resource):
             items=request_data.get('items')
         )
         new_list.save()
-        return new_list, 201
+        return make_response(jsonify({"message": "List created successfully"}), 201)
 
 
 @lists_ns.route('/shopping_list/<int:list_id>')

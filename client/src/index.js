@@ -1,38 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import NavBar from "./components/Navbar"
-import './styles/main.css'
+import {createRoot} from 'react-dom/client'
+import App from "./App";
 
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route
-} from 'react-router-dom'
-import HomePage from "./components/home";
-import LoginPage from "./components/Login";
-import RegisterPage from "./components/Register";
-import CreateList from "./components/CreateList";
-import Login from "./components/Login";
 
-const App=()=>{
-    return (
-        <Router>
-            <NavBar/>
-            <div className="containerCls container">
-                <Routes>
-                    <Route path="/createList" element={ <CreateList/>}>
-                    </Route>
-                    <Route path="/login" element={<LoginPage/>}>
-                    </Route>
-                    <Route path="/register" element={<RegisterPage/>}>
-                    </Route>
-                    <Route path="/" element={<HomePage/>}>
-                    </Route>
-                </Routes>
-            </div>
-        </Router>
-    )
-}
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+
