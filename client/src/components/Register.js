@@ -7,7 +7,7 @@ const RegisterPage = () => {
 
     const {register, watch, handleSubmit, reset, formState: {errors}} = useForm()
     const [show, setShow] = useState(false)
-    const [serverRespoonse, setServerResponse] = useState('')
+    const [serverResponse, setServerResponse] = useState('')
 
     const submitForm = (data) => {
         console.log(data)
@@ -58,7 +58,7 @@ const RegisterPage = () => {
                         <Alert variant="success" onClose={() => setShow(false)} dismissible>
                             <Alert.Heading>Success</Alert.Heading>
                             <p>
-                                {serverRespoonse}
+                                {serverResponse}
                             </p>
                         </Alert>
                     </> :

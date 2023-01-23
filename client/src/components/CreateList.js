@@ -1,13 +1,16 @@
-import React from "react"
-import {Form, Button} from "react-bootstrap";
+import React, {useState} from "react"
+import {Form, Button, Alert} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 
 const CreateList = () => {
 
     const {register, handleSubmit, reset, formState: {errors}} = useForm()
+    const [show, setShow] = useState(false)
+    const [serverResponse, setServerResponse] = useState('')
 
-    const createList =(data) => {
+    const createList = (data) => {
         console.log(data)
+
 
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
         console.log(token)
@@ -22,17 +25,32 @@ const CreateList = () => {
         }
 
         fetch('/shopping_list/shopping_lists', requestOptions)
-            .then(res=>res.json())
-            .then(data=>{
+            .then(res => res.json())
+            .then(data => {
                 console.log(data)
+                setServerResponse(data.message)
+                setShow(true)
+                reset()
             })
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
 
     }
 
     return (
         <div className="container">
-            <h1>Create new Shopping List</h1>
+            {show ?
+                <>
+                    <h1>Create shopping list</h1>
+                    <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                        <Alert.Heading>Success</Alert.Heading>
+                        <p>
+                            {serverResponse}
+                        </p>
+                    </Alert>
+                </> :
+                <h1>Create shopping list</h1>
+
+            }
             <Form>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>

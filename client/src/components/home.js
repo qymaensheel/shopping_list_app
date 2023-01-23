@@ -2,30 +2,151 @@ import React, {useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
 import {useAuth} from "../auth";
 import ShoppingList from "./ShoppingList";
+import {Button, Form, Modal} from "react-bootstrap";
+import {useForm} from "react-hook-form";
 
 
 const LoggedInHome = () => {
 
     const [lists, setLists] = useState([])
+    const [show, setShow] = useState(false)
+    const {register, reset, handleSubmit, setValue, formState: {errors}} = useForm()
+    const [listId, setlistId] = useState(0)
 
     useEffect(
         () => {
             fetch('/shopping_list/shopping_lists')
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     setLists(data)
                 })
                 .catch(err => console.log(err))
         }, []
     )
 
+
+
+    const closeModal = () => {
+        setShow(false)
+    }
+
+    const showModal = (id) => {
+        setShow(true)
+        setlistId(id)
+        lists.map(
+            (item) => {
+                if (item.id === id) {
+                    setValue('title', item.title)
+                    setValue('items', item.items)
+                }
+            }
+        )
+    }
+
+    const updateList = (data) => {
+
+        const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(token)}`
+            },
+            body: JSON.stringify(data)
+        }
+
+        fetch(`/shopping_list/shopping_list/${listId}`, requestOptions)
+            .then(res=>res.json())
+            .then(data=> {
+                console.log(data)
+
+                window.location.reload()
+
+
+            })
+            .catch(err=>console.log(err))
+
+
+    }
+
+    const deleteList = (listId) =>{
+        const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(token)}`
+            }
+        }
+
+        fetch(`/shopping_list/shopping_list/${listId}`, requestOptions)
+            .then(res=>res.json())
+            .then(data=> {
+                console.log(data)
+                window.location.reload()
+            })
+            .catch(err=>console.log(err))
+    }
+
     return (
         <div className="shopping_lists">
+            <Modal
+                show={show}
+                size="lg"
+                onHide={closeModal}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Shopping list
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text"
+                                          {...register('title', {required: true, maxLength: 30})}/>
+
+                        </Form.Group>
+                        {errors.title && <p style={{color: "red"}}><small>Title is required</small></p>}
+                        {errors.title?.type === "maxLength" &&
+                            <p style={{color: "red"}}><small>Maximum characters should be 30</small></p>}
+                        <Form.Group>
+                            <Form.Label>Items</Form.Label>
+                            <Form.Control as="textarea" rows={5} {...register('items', {
+                                required: true,
+                                maxLength: 255
+                            })}/>
+
+                        </Form.Group>
+                        {errors.items && <p style={{color: "red"}}><small>Items are required</small></p>}
+                        {errors.items?.type === "maxLength" &&
+                            <p style={{color: "red"}}><small>Maximum characters should be 255</small></p>}
+                        <br/>
+                        <Form.Group>
+                            <Button variant="primary" onClick={handleSubmit(updateList)}>
+                                Save
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+
+            </Modal>
             {
                 lists.map(
-                    (list) => (
-                        <ShoppingList title={list.title} items={list.items}/>
+                    (list, index) => (
+                        <ShoppingList title={list.title} items={list.items} key={index}
+                                      onClick={() => {
+                                          showModal(list.id)
+                                      }
+                                      }
+                                      onDelete={()=>{
+                                          deleteList(list.id)
+                                      }
+                                      }
+                        />
                     )
                 )
             }
@@ -39,7 +160,7 @@ const LoggedOutHome = () => {
 
     return (
         <div className="containerCls">
-            <h1 className="heading">ShoppingApp</h1>
+            <h1 className="heading" role="heading">ShoppingApp</h1>
             <br/>
 
 
