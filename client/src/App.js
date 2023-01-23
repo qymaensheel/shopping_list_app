@@ -12,7 +12,6 @@ import HomePage from "./components/home";
 import LoginPage from "./components/Login";
 import RegisterPage from "./components/Register";
 import CreateList from "./components/CreateList";
-import Login from "./components/Login";
 
 const App=()=>{
     return (

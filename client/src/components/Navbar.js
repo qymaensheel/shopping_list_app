@@ -2,16 +2,15 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Link} from 'react-router-dom'
 import {useAuth, logout} from "../auth";
 
 
 const LoggedInLinks = () => {
     return (
         <>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/createList">Create List</Nav.Link>
-            <Nav.Link href="#" onClick={()=>{logout()}}>Logout</Nav.Link>
+            <Nav.Link href="/" data-testid="href-home">Home</Nav.Link>
+            <Nav.Link href="/createList" data-testid="href-create">Create List</Nav.Link>
+            <Nav.Link href="#" onClick={()=>{logout()}} data-testid="href-logout">Logout</Nav.Link>
         </>
     )
 }
@@ -19,9 +18,9 @@ const LoggedInLinks = () => {
 const LoggedOutLinks = () => {
     return (
         <>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/"data-testid="href-home">Home</Nav.Link>
+            <Nav.Link href="/register" data-testid="href-register">Register</Nav.Link>
+            <Nav.Link href="/login" data-testid="href-login">Login</Nav.Link>
         </>
     )
 }

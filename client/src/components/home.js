@@ -160,11 +160,11 @@ const LoggedOutHome = () => {
 
     return (
         <div className="containerCls">
-            <h1 className="heading" role="heading">ShoppingApp</h1>
+            <h1 className="heading" data-testid="header">ShoppingApp</h1>
             <br/>
 
 
-            <Link to='/register' className="btn btn-primary btn-lg">Please register to continue</Link>
+            <Link to='/register' className="btn btn-primary btn-lg" data-testid="continue-btn">Please register to continue</Link>
         </div>
     )
 }

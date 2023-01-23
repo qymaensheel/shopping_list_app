@@ -10,7 +10,6 @@ const RegisterPage = () => {
     const [serverResponse, setServerResponse] = useState('')
 
     const submitForm = (data) => {
-        console.log(data)
 
         if (data.password === data.confirmPassword) {
 
@@ -43,11 +42,6 @@ const RegisterPage = () => {
         }
 
     }
-
-    console.log(watch("username"))
-    console.log(watch("email"))
-    console.log(watch("password"))
-    console.log(watch("confirmPassword"))
 
     return (
         <div className="containerCls">

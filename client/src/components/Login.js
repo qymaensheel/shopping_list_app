@@ -38,11 +38,11 @@ const LoginPage = () => {
     return (
         <div className="containerCls">
             <div className="form">
-                <h1>Login to ShoppingApp</h1>
+                <h1 data-testid="login-title">Login to ShoppingApp</h1>
                 <form>
                     <Form.Group>
-                        <Form.Label>Username: </Form.Label>
-                        <Form.Control type="text" placeholder="username"
+                        <Form.Label data-testid="login-username">Username: </Form.Label>
+                        <Form.Control type="text" placeholder="username" data-testid="login-username-field"
                                       {...register('username', {required: true, maxLength: 30})}/>
                     </Form.Group>
                     {errors.username && <p style={{color: 'red'}}><small>Username is required</small></p>}
@@ -50,8 +50,8 @@ const LoginPage = () => {
                         <p style={{color: 'red'}}><small>Username too long</small></p>}
                     <br/>
                     <Form.Group>
-                        <Form.Label>Password: </Form.Label>
-                        <Form.Control type="password" placeholder="password"
+                        <Form.Label data-testid="login-password">Password: </Form.Label>
+                        <Form.Control type="password" placeholder="password" data-testid="login-password-field"
                                       {...register('password', {required: true, minLength: 2})}/>
                     </Form.Group>
                     {errors.password && <p style={{color: 'red'}}><small>Password is required</small></p>}
@@ -59,7 +59,7 @@ const LoginPage = () => {
                         <p style={{color: 'red'}}><small>Password too short</small></p>}
                     <br/>
                     <Form.Group>
-                        <Button as="sub" variant="primary" onClick={handleSubmit(loginUser)}>
+                        <Button as="sub" variant="primary" data-testid="login-submit" onClick={handleSubmit(loginUser)}>
                             Log in
                         </Button>
                     </Form.Group>

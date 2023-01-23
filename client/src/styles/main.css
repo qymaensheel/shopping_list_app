@@ -27,3 +27,7 @@
 .shopping_list .date {
     text-align: right
 }
+
+.items_list {
+    white-space: pre-wrap;
+}

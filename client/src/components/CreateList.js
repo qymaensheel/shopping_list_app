@@ -40,7 +40,7 @@ const CreateList = () => {
         <div className="container">
             {show ?
                 <>
-                    <h1>Create shopping list</h1>
+                    <h1 data-testid="create-header">Create shopping list</h1>
                     <Alert variant="success" onClose={() => setShow(false)} dismissible>
                         <Alert.Heading>Success</Alert.Heading>
                         <p>
@@ -48,13 +48,13 @@ const CreateList = () => {
                         </p>
                     </Alert>
                 </> :
-                <h1>Create shopping list</h1>
+                <h1 data-testid="create-header">Create shopping list</h1>
 
             }
             <Form>
                 <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="text"
+                    <Form.Label data-testid="create-form-title">Title</Form.Label>
+                    <Form.Control type="text" data-testid="create-form-title-field"
                                   {...register('title', {required: true, maxLength: 30})}/>
 
                 </Form.Group>
@@ -62,8 +62,8 @@ const CreateList = () => {
                 {errors.title?.type === "maxLength" &&
                     <p style={{color: "red"}}><small>Maximum characters should be 30</small></p>}
                 <Form.Group>
-                    <Form.Label>Items</Form.Label>
-                    <Form.Control as="textarea" rows={5} {...register('items', {required: true, maxLength: 255})}/>
+                    <Form.Label data-testid="create-form-items">Items</Form.Label>
+                    <Form.Control as="textarea" rows={5} data-testid="create-form-items-field" {...register('items', {required: true, maxLength: 255})}/>
 
                 </Form.Group>
                 {errors.items && <p style={{color: "red"}}><small>Items are required</small></p>}
@@ -71,7 +71,7 @@ const CreateList = () => {
                     <p style={{color: "red"}}><small>Maximum characters should be 255</small></p>}
                 <br/>
                 <Form.Group>
-                    <Button variant="primary" onClick={handleSubmit(createList)}>
+                    <Button variant="primary" onClick={handleSubmit(createList)} data-testid="create-form-submit">
                         Add list
                     </Button>
                 </Form.Group>

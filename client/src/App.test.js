@@ -1,13 +1,41 @@
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
+import renderer from 'react-test-renderer';
+import '@testing-library/jest-dom'
+
 import App from './App';
 
-test('renders the landing page', () => {
-  render(<App />);
+// HOME PAGE TESTS
+it('renders main page snapshot', () => {
+    const tree = renderer
+        .create(<App/>)
+        .toJSON();
+    expect(tree).toMatchSnapshot();
 });
 
-test('renders the landing page', () => {
-  render(<App />);
+it('checks the header', () => {
+    render(<App/>);
+    const element = screen.getByTestId('header')
 
-  // expect(screen.getByRole("heading")).toHaveTextContent(/ShoppingApp/);
-  expect(screen.getByRole("heading")).toBe('ShoppingApp')
+    expect(element).toBeInTheDocument()
+});
+
+it('checks the header content', () => {
+    render(<App/>);
+    const element = screen.getByTestId('header')
+
+    expect(element).toHaveTextContent('ShoppingApp')
+});
+
+it('checks the button', () => {
+    render(<App/>);
+    const element = screen.getByTestId('continue-btn')
+
+    expect(element).toBeInTheDocument()
+});
+
+it('checks the button content', () => {
+    render(<App/>);
+    const element = screen.getByTestId('continue-btn')
+
+    expect(element).toHaveTextContent('Please register to continue')
 });
