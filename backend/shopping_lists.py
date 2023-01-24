@@ -15,6 +15,7 @@ shopping_list_model = lists_ns.model(
     }
 )
 
+
 @lists_ns.route('/hello')
 class HelloResource(Resource):
     def get(self):

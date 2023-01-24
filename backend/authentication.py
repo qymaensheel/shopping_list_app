@@ -44,7 +44,7 @@ class SignUp(Resource):
             new_user.save()
             return make_response(jsonify({"message": f"User {username} created."}), 201)
         else:
-            return jsonify({"message": f"User {username} already exists."})
+            return make_response(jsonify({"message": f"User {username} already exists."}), 409)
 
 
 @auth_ns.route('/login')
@@ -68,6 +68,8 @@ class Login(Resource):
                     "refresh_token": refresh_token
                 }
             )
+        else:
+            return make_response(jsonify({"message": f"Wrong credentials"}), 401)
 
 
 @auth_ns.route('/refresh')
