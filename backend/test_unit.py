@@ -95,6 +95,7 @@ class ApiTestCase(unittest.TestCase):
         self.assertEqual(lists, [])
 
     def test_create_list(self):
+        """Test create list and check status code"""
         _signup_response = self.client.post('/authentication/sign_up',
                                             json={"username": "user_test1", "email": "user@test.pl",
                                                   "password": "test_passw0rd"}

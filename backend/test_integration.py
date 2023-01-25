@@ -139,6 +139,6 @@ class ApiTestCase(unittest.TestCase):
 
         self.assertEqual(refresh_response.status_code, 200)
 
-1
+
 if __name__ == '__main__':
     unittest.main()

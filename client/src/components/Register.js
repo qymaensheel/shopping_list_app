@@ -62,50 +62,50 @@ const RegisterPage = () => {
                 <form>
                     <Form.Group>
                         <Form.Label>Username: </Form.Label>
-                        <Form.Control type="text" placeholder="username" {...register("username", {
+                        <Form.Control type="text" placeholder="username"  data-testid="username-login"{...register("username", {
                             required: true,
                             maxLength: 30
                         })}/>
                     </Form.Group>
-                    {errors.username && <p style={{color: "red"}}><small>Username is required</small></p>}
+                    {errors.username && <p style={{color: "red"}} data-testid="username-required"><small>Username is required</small></p>}
                     {errors.username?.type === "maxLength" &&
-                        <p style={{color: "red"}}><small>Maximum characters should be 25</small></p>}
+                        <p style={{color: "red"}} data-testid="username-long"><small>Maximum character limit is 25</small></p>}
                     <br/>
                     <Form.Group>
                         <Form.Label>Email address: </Form.Label>
-                        <Form.Control type="email" placeholder="email" {...register("email", {
+                        <Form.Control type="email" placeholder="email" data-testid="email-login" {...register("email", {
                             required: true,
                             maxLength: 100,
                         })}/>
                     </Form.Group>
-                    {errors.email && <p style={{color: "red"}}><small>Email required</small></p>}
+                    {errors.email && <p style={{color: "red"}} data-testid="email-required"><small>Email required</small></p>}
                     {errors.email?.type === "maxLength" &&
-                        <p style={{color: "red"}}><small>Email too long - 100 characters max</small></p>}
+                        <p style={{color: "red"}} data-testid="email-long"><small>Email too long - 100 characters max</small></p>}
                     <br/>
                     <Form.Group>
                         <Form.Label>Password: </Form.Label>
-                        <Form.Control type="password" placeholder="password" {...register("password", {
+                        <Form.Control type="password" placeholder="password" data-testid="password-login" {...register("password", {
                             required: true,
                             minLength: 2
                         })}/>
                     </Form.Group>
-                    {errors.password && <p style={{color: "red"}}><small>Password required</small></p>}
+                    {errors.password && <p style={{color: "red"}} data-testid="password-required"><small>Password required</small></p>}
                     {errors.password?.type === "minLength" &&
-                        <p style={{color: "red"}}><small>Password too short - 4 characters min</small></p>}
+                        <p style={{color: "red"}} data-testid="password-short"><small>Password too short - 4 characters min</small></p>}
                     <br/>
                     <Form.Group>
                         <Form.Label>Confirm password: </Form.Label>
-                        <Form.Control type="password" placeholder="password"  {...register("confirmPassword", {
+                        <Form.Control type="password" placeholder="password" data-testid="confirm-login" {...register("confirmPassword", {
                             required: true,
                             minLength: 2
                         })}/>
                     </Form.Group>
-                    {errors.confirmPassword && <p style={{color: "red"}}><small>Confirm pass is required</small></p>}
+                    {errors.confirmPassword && <p style={{color: "red"}} data-testid="password-confirm"><small>Confirm pass is required</small></p>}
                     {errors.confirmPassword?.type === "minLength" &&
                         <p style={{color: "red"}}><small>Password too short - 4 characters min</small></p>}
                     <br/>
                     <Form.Group>
-                        <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)}>
+                        <Button as="sub" variant="primary" data-testid="register-btn" onClick={handleSubmit(submitForm)}>
                             Register
                         </Button>
                     </Form.Group>

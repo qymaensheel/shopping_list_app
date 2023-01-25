@@ -106,28 +106,29 @@ const LoggedInHome = () => {
                     <Form>
                         <Form.Group>
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text"
+                            <Form.Control type="text" data-testid="list-title-modal"
                                           {...register('title', {required: true, maxLength: 30})}/>
 
                         </Form.Group>
-                        {errors.title && <p style={{color: "red"}}><small>Title is required</small></p>}
+                        {errors.title && <p style={{color: "red"}} data-testid="list-title-required"><small>Title is required</small></p>}
                         {errors.title?.type === "maxLength" &&
-                            <p style={{color: "red"}}><small>Maximum characters should be 30</small></p>}
+                            <p style={{color: "red"}} data-testid="list-title-long"><small>Maximum characters should be 30</small></p>}
                         <Form.Group>
                             <Form.Label>Items</Form.Label>
-                            <Form.Control as="textarea" rows={5} {...register('items', {
+                            <Form.Control as="textarea" data-testid="list-items-modal" rows={5} {...register('items', {
                                 required: true,
                                 maxLength: 255
                             })}/>
 
                         </Form.Group>
-                        {errors.items && <p style={{color: "red"}}><small>Items are required</small></p>}
+                        {errors.items && <p style={{color: "red"}} data-testid="list-items-required"><small>Items are required</small></p>}
                         {errors.items?.type === "maxLength" &&
-                            <p style={{color: "red"}}><small>Maximum characters should be 255</small></p>}
+                            <p style={{color: "red"}} data-testid="list-items-long"><small>Maximum characters should be 255</small></p>}
                         <br/>
                         <Form.Group>
                             <Form.Label data-testid="create-form-date">Due date</Form.Label>
-                            <DatePicker data-testid="create-form-date-field"/>
+                            <br/>
+                            <DatePicker value={new Date(2023, 2, 4)} data-testid="create-form-date-field"/>
 
                         </Form.Group>
                         <br/>

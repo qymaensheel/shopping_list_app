@@ -45,18 +45,18 @@ const LoginPage = () => {
                         <Form.Control type="text" placeholder="username" data-testid="login-username-field"
                                       {...register('username', {required: true, maxLength: 30})}/>
                     </Form.Group>
-                    {errors.username && <p style={{color: 'red'}}><small>Username is required</small></p>}
+                    {errors.username && <p style={{color: 'red'}} data-testid="username-required"><small>Username is required</small></p>}
                     {errors.username?.type === "maxLength" &&
-                        <p style={{color: 'red'}}><small>Username too long</small></p>}
+                        <p style={{color: 'red'}} data-testid="username-long"><small>Username too long</small></p>}
                     <br/>
                     <Form.Group>
                         <Form.Label data-testid="login-password">Password: </Form.Label>
                         <Form.Control type="password" placeholder="password" data-testid="login-password-field"
                                       {...register('password', {required: true, minLength: 2})}/>
                     </Form.Group>
-                    {errors.password && <p style={{color: 'red'}}><small>Password is required</small></p>}
+                    {errors.password && <p style={{color: 'red'}} data-testid="password-required"><small>Password is required</small></p>}
                     {errors.password?.type === "minLength" &&
-                        <p style={{color: 'red'}}><small>Password too short</small></p>}
+                        <p style={{color: 'red'}} data-testid="password-short"><small>Password too short</small></p>}
                     <br/>
                     <Form.Group>
                         <Button as="sub" variant="primary" data-testid="login-submit" onClick={handleSubmit(loginUser)}>

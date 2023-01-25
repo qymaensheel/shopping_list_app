@@ -59,9 +59,9 @@ const CreateList = () => {
                                   {...register('title', {required: true, maxLength: 30})}/>
 
                 </Form.Group>
-                {errors.title && <p style={{color: "red"}}><small>Title is required</small></p>}
+                {errors.title && <p style={{color: "red"}} data-testid="create-form-title-required"><small>Title is required</small></p>}
                 {errors.title?.type === "maxLength" &&
-                    <p style={{color: "red"}}><small>Maximum characters should be 30</small></p>}
+                    <p style={{color: "red"}} data-testid="create-form-title-long"><small>Maximum characters should be 30</small></p>}
                 <Form.Group>
                     <Form.Label data-testid="create-form-items">Items</Form.Label>
                     <Form.Control as="textarea" rows={5} data-testid="create-form-items-field" {...register('items', {
@@ -70,13 +70,13 @@ const CreateList = () => {
                     })}/>
 
                 </Form.Group>
-                {errors.items && <p style={{color: "red"}}><small>Items are required</small></p>}
+                {errors.items && <p style={{color: "red"}} data-testid="create-form-items-required"><small>Items are required</small></p>}
                 {errors.items?.type === "maxLength" &&
-                    <p style={{color: "red"}}><small>Maximum characters should be 255</small></p>}
+                    <p style={{color: "red"}} data-testid="create-form-items-long"><small>Maximum characters should be 255</small></p>}
                 <br/>
                 <Form.Group>
                     <Form.Label data-testid="create-form-date">Due date</Form.Label>
-                    <DatePicker data-testid="create-form-date-field"/>
+                    <DatePicker value={new Date(2023, 2, 4)} data-testid="create-form-date-field"/>
 
                 </Form.Group>
                 <br/>

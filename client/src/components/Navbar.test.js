@@ -35,20 +35,3 @@ it('checks content of navbar unlogged user', () => {
 });
 
 
-// it('checks content of navbar logged user', () => {
-//     jest.mock('../auth', () => {
-//         return jest.fn(() => ({
-//             isLoggedIn: true
-//         }))
-//     })
-//     render(<Navbar/>)
-//     const nav_home = screen.getByTestId('href-home')
-//     const nav_create = screen.getByTestId('href-create')
-//     const nav_logout = screen.getByTestId('href-logout')
-//
-//     expect(nav_home).toHaveTextContent('Home')
-//     expect(nav_create).toHaveTextContent('Register')
-//     expect(nav_logout).toHaveTextContent('Login')
-//     jest.restoreAllMocks()
-// });
-
