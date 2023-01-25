@@ -4,6 +4,7 @@ import {useAuth} from "../auth";
 import ShoppingList from "./ShoppingList";
 import {Button, Form, Modal} from "react-bootstrap";
 import {useForm} from "react-hook-form";
+import DatePicker from "react-date-picker";
 
 
 const LoggedInHome = () => {
@@ -23,7 +24,6 @@ const LoggedInHome = () => {
                 .catch(err => console.log(err))
         }, []
     )
-
 
 
     const closeModal = () => {
@@ -57,20 +57,20 @@ const LoggedInHome = () => {
         }
 
         fetch(`/shopping_list/shopping_list/${listId}`, requestOptions)
-            .then(res=>res.json())
-            .then(data=> {
+            .then(res => res.json())
+            .then(data => {
                 console.log(data)
 
                 window.location.reload()
 
 
             })
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
 
 
     }
 
-    const deleteList = (listId) =>{
+    const deleteList = (listId) => {
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY')
 
         const requestOptions = {
@@ -82,12 +82,12 @@ const LoggedInHome = () => {
         }
 
         fetch(`/shopping_list/shopping_list/${listId}`, requestOptions)
-            .then(res=>res.json())
-            .then(data=> {
+            .then(res => res.json())
+            .then(data => {
                 console.log(data)
                 window.location.reload()
             })
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
     }
 
     return (
@@ -126,6 +126,12 @@ const LoggedInHome = () => {
                             <p style={{color: "red"}}><small>Maximum characters should be 255</small></p>}
                         <br/>
                         <Form.Group>
+                            <Form.Label data-testid="create-form-date">Due date</Form.Label>
+                            <DatePicker data-testid="create-form-date-field"/>
+
+                        </Form.Group>
+                        <br/>
+                        <Form.Group>
                             <Button variant="primary" onClick={handleSubmit(updateList)}>
                                 Save
                             </Button>
@@ -142,7 +148,7 @@ const LoggedInHome = () => {
                                           showModal(list.id)
                                       }
                                       }
-                                      onDelete={()=>{
+                                      onDelete={() => {
                                           deleteList(list.id)
                                       }
                                       }
@@ -164,7 +170,8 @@ const LoggedOutHome = () => {
             <br/>
 
 
-            <Link to='/register' className="btn btn-primary btn-lg" data-testid="continue-btn">Please register to continue</Link>
+            <Link to='/register' className="btn btn-primary btn-lg" data-testid="continue-btn">Please register to
+                continue</Link>
         </div>
     )
 }
